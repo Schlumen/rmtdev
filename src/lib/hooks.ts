@@ -24,18 +24,21 @@ export function useActiveId() {
 
 export function useJobItem(id: number | null) {
   const [jobItem, setJobItem] = useState<JobItemExtended | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (!id) return;
 
     (async () => {
+      setIsLoading(true);
       const response = await fetch(`${BASE_API_URL}/${id}`);
       const data = await response.json();
+      setIsLoading(false);
       setJobItem(data.jobItem);
     })();
   }, [id]);
 
-  return jobItem;
+  return [jobItem, isLoading] as const;
 }
 
 export function useJobItems(searchText: string) {
