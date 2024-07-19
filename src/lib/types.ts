@@ -18,3 +18,7 @@ export type JobItemExtended = JobItem & {
   coverImgURL: string;
   companyURL: string;
 };
+
+export type SortBy = "relevant" | "recent";
+
+export type PageDirection = "next" | "previous";
